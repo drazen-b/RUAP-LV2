@@ -5,36 +5,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using WebAPI.Models;
+using WebAPI.Services;
 
 namespace WebAPI.Controllers
 {
     public class ContactController : ApiController
     {
 
-/*        public string[] Get()
-        {
-            return new string[]
-            {
-        "Hello",
-        "World"
-            };
-      }*/
+        /*        public string[] Get()
+                {
+                    return new string[]
+                    {
+                "Hello",
+                "World"
+                    };
+              }*/
 
-            public Contact[] Get()
+        private ContactRepository contactRepository;
+
+        public ContactController()
         {
-            return new Contact[]
-            {
-        new Contact
-        {
-            Id = 1,
-            Name = "Glenn Block"
-        },
-        new Contact
-        {
-            Id = 2,
-            Name = "Dan Roth"
+            this.contactRepository = new ContactRepository();
         }
-            };
+
+        public Contact[] Get()
+        {
+            return contactRepository.GetAllContacts();
         }
     }
 
